@@ -16,22 +16,24 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                 controllerAs: 'vm',
                 abstract: true
             })
-            .state('home.dashboard', {
-                url: '/dashboard',
-                templateUrl: 'app/views/dashboard.html',
-                data: {
-                    title: 'Dashboard'
-                }
-            })
-            .state('home.profile', {
-                url: '/profile',
-                templateUrl: 'app/views/profile.html',
-                controller: 'ProfileController',
-                controllerAs: 'vm',
-                data: {
-                    title: 'Profile'
-                }
-            })
+            /*
+             .state('home.dashboard', {
+             url: '/dashboard',
+             templateUrl: 'app/views/dashboard.html',
+             data: {
+             title: 'Dashboard'
+             }
+             })
+             .state('home.profile', {
+             url: '/profile',
+             templateUrl: 'app/views/profile.html',
+             controller: 'ProfileController',
+             controllerAs: 'vm',
+             data: {
+             title: 'Profile'
+             }
+             })
+             */
             .state('home.beans', {
                 url: '/beans',
                 controller: 'BeansController',
@@ -59,6 +61,15 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                     title: 'HTTP Traces'
                 }
             })
+            .state('home.httpStats', {
+                url: '/httpStats',
+                controller: 'HttpStatsController',
+                controllerAs: 'vm',
+                templateUrl: 'app/views/httpStats.html',
+                data: {
+                    title: 'HTTP Stats'
+                }
+            })
             .state('home.table', {
                 url: '/table',
                 controller: 'TableController',
@@ -69,7 +80,7 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                 }
             });
 
-        $urlRouterProvider.otherwise('/dashboard');
+        $urlRouterProvider.otherwise('/beans');
 
         $mdThemingProvider
             .theme('default')

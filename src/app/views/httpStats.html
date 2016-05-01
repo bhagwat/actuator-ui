@@ -1,0 +1,37 @@
+<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('metrics')">
+    <div class="md-toolbar-tools">
+        <span>HTTP Statistics</span>
+    </div>
+</md-toolbar>
+
+<md-table-container>
+    <table md-table md-row-select ng-model="selected" md-progress="promise">
+        <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
+        <tr md-row>
+            <th md-column>#</th>
+            <th md-column md-string md-order-by="url"><span>URL</span></th>
+            <th md-column md-numeric md-order-by="status">Status</th>
+            <th md-column md-numeric md-order-by="counter">Counter</th>
+            <th md-column md-numeric md-order-by="responseTime">Response Time (ms)</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="item in paginatedResult track by $index">
+            <td md-cell>{{(query.page -1)* query.limit + $index +1}}</td>
+            <td md-cell>{{item.url}}</td>
+            <td md-cell>{{item.status}}</td>
+            <td md-cell>{{item.counter}}</td>
+            <td md-cell>{{item.responseTime}}</td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit"
+                     md-limit-options="[10, 20, 30]"
+                     md-page="query.page"
+                     md-total="{{total}}"
+                     md-on-paginate="sortAndPaginateResult"
+                     md-page-select>
+
+</md-table-pagination>
