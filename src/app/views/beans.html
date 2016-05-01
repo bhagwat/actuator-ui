@@ -1,0 +1,40 @@
+<div class="table-responsive-vertical md-whiteframe-z1" data-ng-init="vm.init()">
+    <md-content data-ng-repeat="context in vm.contexts">
+        <md-subheader class="md-primary">
+            <strong>Context: </strong>{{context.context}},
+            <strong>Total Beans: </strong>{{context.beans.length}}
+        </md-subheader>
+        <md-divider></md-divider>
+        <table id="table" class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Bean</th>
+                <th>Type</th>
+                <th>Dependencies</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="data in context.beans|orderBy:'bean' track by $index">
+                <td>
+                    <strong>{{$index + 1}}</strong>
+                </td>
+                <td>
+                    <strong>
+                        <class-name class-name="{{data.bean}}"></class-name>
+                    </strong>
+                    <p>{{data.scope}}</p>
+                </td>
+                <td>
+                    <class-name class-name="{{data.type}}"></class-name>
+                </td>
+                <td>
+                    <p data-ng-repeat="dependency in data.dependencies">
+                        <class-name class-name="{{dependency}}"></class-name>
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </md-content>
+</div>

@@ -1,0 +1,26 @@
+plugins {
+    id "com.moowork.node" version "0.12"
+    id "com.moowork.gulp" version "0.12"
+}
+
+ext {
+    nodejsVersion = "5.11.0"
+}
+
+gulp {
+    workDir = file("${project.projectDir}")
+    colors = true
+    bufferOutput = false
+}
+
+node {
+    version = nodejsVersion
+    download = true
+}
+
+npmInstall.doFirst {
+    file("${project.projectDir}/bower_components").mkdirs()
+    args = ['--unsafe-perm'] //npm install by root user on server
+}
+
+gulp_build.dependsOn "npmInstall", "gulpInstall"
