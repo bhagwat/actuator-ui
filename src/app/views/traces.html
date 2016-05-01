@@ -1,43 +1,53 @@
-<div class="table-responsive-vertical md-whiteframe-z1" data-ng-init="vm.init()">
-    <md-content>
-        <md-subheader class="md-primary"><h4>HTTP call trace</h4>
-        </md-subheader>
-        <md-divider></md-divider>
-        <table id="table" class="table table-hover table-bordered dataTable">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Method</th>
-                <th>Path</th>
-                <th>Host</th>
-                <th>Status</th>
-                <th>Request</th>
-                <th>Response</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="trace in vm.traces track by $index">
-                <td><strong>{{$index + 1}}</strong></td>
-                <td>{{trace.timestamp|date:medium}}</td>
-                <td>{{trace.info.method}}</td>
-                <td>{{trace.info.path}}</td>
-                <td> {{trace.info.headers.request.host}}</td>
-                <td>{{trace.info.headers.response.status}}</td>
-                <td>
-                    <a href="javascript:void(0)" data-ng-click="trace.showRequest=!trace.showRequest">Show Details</a>
-                    <p data-ng-show="trace.showRequest" data-ng-repeat="(key, value) in trace.info.headers.request">
-                        <strong>{{key}}</strong>: {{value}}
-                    </p>
-                </td>
-                <td>
-                    <a href="javascript:void(0)" data-ng-click="trace.showResponse=!trace.showResponse">Show Detail</a>
-                    <p data-ng-show="trace.showResponse" data-ng-repeat="(key, value) in trace.info.headers.response">
-                        <strong>{{key}}</strong>: {{value}}
-                    </p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </md-content>
-</div>
+<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('trace')">
+    <div class="md-toolbar-tools">
+        <span>HTTP Call Trace</span>
+    </div>
+</md-toolbar>
+
+<md-table-container>
+    <table md-table md-row-select ng-model="selected" md-progress="promise">
+        <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
+        <tr md-row>
+            <th md-column>#</th>
+            <th md-column md-numeric md-order-by="timestamp"><span>Date</span></th>
+            <th md-column md-string md-order-by="method">Method</th>
+            <th md-column md-string md-order-by="path">Path</th>
+            <th md-column md-string md-order-by="host">Host</th>
+            <th md-column md-numeric md-order-by="status">Status</th>
+            <th md-column>Request</th>
+            <th md-column>Response</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="trace in paginatedResult track by $index">
+            <td md-cell>{{(query.page -1)* query.limit + $index +1}}</td>
+            <td md-cell>{{trace.timestamp|date:short}}</td>
+            <td md-cell>{{trace.method}}</td>
+            <td md-cell>{{trace.path}}</td>
+            <td md-cell>{{trace.host}}</td>
+            <td md-cell>{{trace.status}}</td>
+            <td md-cell>
+                <a href="javascript:void(0)" data-ng-click="trace.showRequest=!trace.showRequest">Show Details</a>
+                <p data-ng-show="trace.showRequest" data-ng-repeat="(key, value) in trace.request">
+                    <strong>{{key}}</strong>: {{value}}
+                </p>
+            </td>
+            <td md-cell><a href="javascript:void(0)" data-ng-click="trace.showResponse=!trace.showResponse">Show
+                Detail</a>
+                <p data-ng-show="trace.showResponse" data-ng-repeat="(key, value) in trace.response">
+                    <strong>{{key}}</strong>: {{value}}
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit"
+                     md-limit-options="[10, 20, 30]"
+                     md-page="query.page"
+                     md-total="{{total}}"
+                     md-on-paginate="sortAndPaginateResult"
+                     md-page-select>
+
+</md-table-pagination>

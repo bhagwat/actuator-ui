@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
-        'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app', "ngResource", "ngLodash"])
+        'ngSanitize', 'ui.router', 'ngMaterial', 'md.data.table', 'nvd3', 'app', "ngResource", "ngLodash"])
     .config(['$resourceProvider', function ($resourceProvider) {
         // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;

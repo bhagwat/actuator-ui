@@ -16,7 +16,8 @@
     "angular-material": "^1.0.7",
     "angular-mocks": "^1.5.0",
     "angular-resource": "^1.5.3",
-    "ng-lodash": "^0.4.0"
+    "ng-lodash": "^0.4.0",
+    "angular-material-data-table": "^0.10.9"
   },
   "devDependencies": {},
   "resolutions": {
