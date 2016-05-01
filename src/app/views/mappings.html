@@ -1,0 +1,30 @@
+<div class="table-responsive-vertical md-whiteframe-z1" data-ng-init="vm.init()">
+    <md-content>
+        <md-subheader class="md-primary">
+            <strong>Total Mappings: </strong>{{vm.totalMappings}}
+        </md-subheader>
+        <md-divider></md-divider>
+        <table id="table" class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>URI</th>
+                <th>Bean</th>
+                <th>Method</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(uri, bean) in vm.mappings track by $index">
+                <td>
+                    <strong>{{$index + 1}}</strong>
+                </td>
+                <td><strong> {{uri}} </strong></td>
+                <td>{{bean.bean}}</td>
+                <td>
+                    {{bean.method}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </md-content>
+</div>

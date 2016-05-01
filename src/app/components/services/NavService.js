@@ -15,6 +15,11 @@
         sref: '.beans'
       },
       {
+        name: 'Mappings',
+        icon: 'dashboard',
+        sref: '.mappings'
+      },
+      {
         name: 'Dashboard',
         icon: 'dashboard',
         sref: '.dashboard'

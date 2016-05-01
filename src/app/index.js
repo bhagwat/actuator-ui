@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
-        'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app', "ngResource", "ngTable"])
+        'ngSanitize', 'ui.router', 'ngMaterial', 'nvd3', 'app', "ngResource", "ngLodash"])
     .config(['$resourceProvider', function ($resourceProvider) {
         // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;
@@ -39,6 +39,15 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                 templateUrl: 'app/views/beans.html',
                 data: {
                     title: 'Beans'
+                }
+            })
+            .state('home.mappings', {
+                url: '/mappings',
+                controller: 'MappingsController',
+                controllerAs: 'vm',
+                templateUrl: 'app/views/mappings.html',
+                data: {
+                    title: 'Mappings'
                 }
             })
             .state('home.table', {
