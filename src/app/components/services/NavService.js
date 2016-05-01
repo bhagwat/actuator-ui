@@ -20,19 +20,14 @@
         sref: '.mappings'
       },
       {
+        name: 'Traces',
+        icon: 'dashboard',
+        sref: '.traces'
+      },
+      {
         name: 'Dashboard',
         icon: 'dashboard',
         sref: '.dashboard'
-      },
-      {
-        name: 'Profile',
-        icon: 'person',
-        sref: '.profile'
-      },
-      {
-        name: 'Table',
-        icon: 'view_module',
-        sref: '.table'
       }
     ];
 

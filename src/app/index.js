@@ -50,6 +50,15 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                     title: 'Mappings'
                 }
             })
+            .state('home.traces', {
+                url: '/traces',
+                controller: 'TracesController',
+                controllerAs: 'vm',
+                templateUrl: 'app/views/traces.html',
+                data: {
+                    title: 'HTTP Traces'
+                }
+            })
             .state('home.table', {
                 url: '/table',
                 controller: 'TableController',
