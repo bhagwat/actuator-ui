@@ -1,30 +1,35 @@
-<div class="table-responsive-vertical md-whiteframe-z1" data-ng-init="vm.init()">
-    <md-content>
-        <md-subheader class="md-primary">
-            <strong>Total Mappings: </strong>{{vm.totalMappings}}
-        </md-subheader>
-        <md-divider></md-divider>
-        <table id="table" class="table table-hover table-bordered">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>URI</th>
-                <th>Bean</th>
-                <th>Method</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="(uri, bean) in vm.mappings track by $index">
-                <td>
-                    <strong>{{$index + 1}}</strong>
-                </td>
-                <td><strong> {{uri}} </strong></td>
-                <td>{{bean.bean}}</td>
-                <td>
-                    {{bean.method}}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </md-content>
-</div>
+<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('mappings')">
+    <div class="md-toolbar-tools">
+        <span>URL mappings</span>
+    </div>
+</md-toolbar>
+
+<md-table-container>
+    <table md-table md-row-select ng-model="selected" md-progress="promise">
+        <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
+        <tr md-row>
+            <th md-column>#</th>
+            <th md-column md-string md-order-by="uri"><span>URI</span></th>
+            <th md-column md-string md-order-by="bean">Bean</th>
+            <th md-column md-string md-order-by="method">Method</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="item in paginatedResult track by $index">
+            <td md-cell>{{(query.page -1)* query.limit + $index +1}}</td>
+            <td md-cell>{{item.uri}}</td>
+            <td md-cell>{{item.bean}}</td>
+            <td md-cell>{{item.method}}</td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit"
+                     md-limit-options="[10, 20, 30]"
+                     md-page="query.page"
+                     md-total="{{total}}"
+                     md-on-paginate="sortAndPaginateResult"
+                     md-page-select>
+
+</md-table-pagination>
