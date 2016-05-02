@@ -1,40 +1,35 @@
-<div class="table-responsive-vertical md-whiteframe-z1" data-ng-init="vm.init()">
-    <md-content data-ng-repeat="context in vm.contexts">
-        <md-subheader class="md-primary">
-            <strong>Context: </strong>{{context.context}},
-            <strong>Total Beans: </strong>{{context.beans.length}}
-        </md-subheader>
-        <md-divider></md-divider>
-        <table id="table" class="table table-hover table-bordered">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Bean</th>
-                <th>Type</th>
-                <th>Dependencies</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="data in context.beans|orderBy:'bean' track by $index">
-                <td>
-                    <strong>{{$index + 1}}</strong>
-                </td>
-                <td>
-                    <strong>
-                        <class-name class-name="{{data.bean}}"></class-name>
-                    </strong>
-                    <p>{{data.scope}}</p>
-                </td>
-                <td>
-                    <class-name class-name="{{data.type}}"></class-name>
-                </td>
-                <td>
-                    <p data-ng-repeat="dependency in data.dependencies">
-                        <class-name class-name="{{dependency}}"></class-name>
-                    </p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </md-content>
-</div>
+<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('beans')">
+    <div class="md-toolbar-tools">
+        <span>Managed Beans</span>
+    </div>
+</md-toolbar>
+
+<md-table-container>
+    <table md-table md-row-select ng-model="selected" md-progress="promise">
+        <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
+        <tr md-row>
+            <th md-column>#</th>
+            <th md-column md-string md-order-by="bean"><span>Bean</span></th>
+            <th md-column md-numeric md-order-by="type">Type</th>
+            <th md-column md-numeric md-order-by="dependencies">Dependencies</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="item in paginatedResult track by $index">
+            <td md-cell>{{(query.page -1)* query.limit + $index +1}}</td>
+            <td md-cell>{{item.bean}}</td>
+            <td md-cell>{{item.type}}</td>
+            <td md-cell>{{item.dependencies}}</td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit"
+                     md-limit-options="[10, 20, 30]"
+                     md-page="query.page"
+                     md-total="{{total}}"
+                     md-on-paginate="sortAndPaginateResult"
+                     md-page-select>
+
+</md-table-pagination>
