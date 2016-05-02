@@ -23,7 +23,7 @@
                 $scope.selected = [];
 
                 $scope.query = {
-                    order: 'timestamp',
+                    order: '-timestamp',
                     limit: 10,
                     page: 1
                 };

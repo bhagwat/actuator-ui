@@ -15,7 +15,7 @@
                 $scope.selected = [];
 
                 $scope.query = {
-                    order: '-responseTime',
+                    order: '-bean',
                     limit: 10,
                     page: 1
                 };
