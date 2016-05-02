@@ -1,0 +1,30 @@
+<md-toolbar class="md-table-toolbar md-default" data-ng-init="vm.init('dump')">
+    <div class="md-toolbar-tools">
+        <h2 class="md-flex">Thread dump</h2>
+    </div>
+</md-toolbar>
+<div data-ng-repeat="dump in vm.threadDump">
+    <md-toolbar class="md-info">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">
+                "{{dump.threadName}}" ID={{dump.threadId}} {{dump.threadState}}
+                <span data-ng-show="dump.inNative"> (In Native)</span>
+                <span data-ng-show="!dump.inNative && dump.lockName"> on {{dump.lockName}}</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+        <p class="md-body-1">
+            <span data-ng-repeat="stackTrace in dump.stackTrace" >
+                at
+            {{stackTrace.className}}.{{stackTrace.methodName}}
+            (
+            <span data-ng-show="stackTrace.nativeMethod">Native Method</span>
+            <span data-ng-hide="stackTrace.nativeMethod">{{stackTrace.fileName}}
+                <span data-ng-show="stackTrace.lineNumber>0">:{{stackTrace.lineNumber}}</span>
+            </span>
+            )<br/>
+            </span>
+        </p>
+    </md-content>
+</div>

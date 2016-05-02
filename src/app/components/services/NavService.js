@@ -30,6 +30,11 @@
                 sref: '.httpStats'
             },
             {
+                name: 'Thread Dump',
+                icon: 'dashboard',
+                sref: '.threadDump'
+            },
+            {
                 name: 'Dashboard',
                 icon: 'dashboard',
                 sref: '.dashboard'

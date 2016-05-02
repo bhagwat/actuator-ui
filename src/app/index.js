@@ -70,13 +70,13 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                     title: 'HTTP Stats'
                 }
             })
-            .state('home.table', {
-                url: '/table',
-                controller: 'TableController',
+            .state('home.threadDump', {
+                url: '/threadDump',
+                controller: 'ThreadDumpController',
                 controllerAs: 'vm',
-                templateUrl: 'app/views/table.html',
+                templateUrl: 'app/views/threadDump.html',
                 data: {
-                    title: 'Table'
+                    title: 'Thread Dump'
                 }
             });
 
