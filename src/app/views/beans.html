@@ -1,11 +1,13 @@
-<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('beans')">
+<md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar" data-ng-init="init('beans')">
     <div class="md-toolbar-tools">
-        <span>Managed Beans</span>
+        <h3 class="panel-widget-tittle">Managed Beans</h3>
+        <span flex></span>
     </div>
 </md-toolbar>
 
 <md-table-container>
-    <table md-table md-row-select ng-model="selected" md-progress="promise">
+    <table md-table md-row-select ng-model="selected" md-progress="promise"
+           class="table table-hover table-bordered">
         <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
         <tr md-row>
             <th md-column>#</th>

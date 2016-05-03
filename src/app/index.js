@@ -5,11 +5,6 @@ angular.module('angularMaterialAdmin', [
         'ngSanitize', 'ui.router', 'ngMaterial',
         'md.data.table', 'nvd3', 'app', "ngResource",
         "ngLodash", "googlechart"])
-    .config(function ($mdThemingProvider) {
-        $mdThemingProvider.theme('default')
-            .primaryPalette('pink')
-            .accentPalette('orange');
-    })
     .config(['$resourceProvider', function ($resourceProvider) {
         $resourceProvider.defaults.stripTrailingSlashes = false;
     }])

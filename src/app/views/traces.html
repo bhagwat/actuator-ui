@@ -1,11 +1,13 @@
-<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('trace')">
+<md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar" data-ng-init="init('trace')">
     <div class="md-toolbar-tools">
-        <span>HTTP Call Trace</span>
+        <h3 class="panel-widget-tittle">HTTP call trace</h3>
+        <span flex></span>
     </div>
 </md-toolbar>
 
 <md-table-container>
-    <table md-table md-row-select ng-model="selected" md-progress="promise">
+    <table md-table md-row-select ng-model="selected" md-progress="promise"
+           class="table table-hover table-bordered">
         <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
         <tr md-row>
             <th md-column>#</th>

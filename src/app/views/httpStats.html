@@ -1,12 +1,14 @@
-<md-toolbar class="md-table-toolbar md-default" data-ng-init="init('metrics')">
+<md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar" data-ng-init="init('metrics')">
     <div class="md-toolbar-tools">
-        <span>HTTP Statistics</span>
+        <h3 class="panel-widget-tittle">HTTP statistics</h3>
+        <span flex></span>
     </div>
 </md-toolbar>
 
 <md-table-container>
-    <table md-table md-row-select ng-model="selected" md-progress="promise">
-        <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
+    <table md-table md-row-select ng-model="selected" md-progress="promise"
+           class="table table-hover table-bordered">
+    <thead md-head md-order="query.order" md-on-reorder="sortAndPaginateResult">
         <tr md-row>
             <th md-column>#</th>
             <th md-column md-string md-order-by="url"><span>URL</span></th>
