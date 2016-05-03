@@ -1,9 +1,16 @@
 'use strict';
 
-angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
-        'ngSanitize', 'ui.router', 'ngMaterial', 'md.data.table', 'nvd3', 'app', "ngResource", "ngLodash"])
+angular.module('angularMaterialAdmin', [
+        'ngAnimate', 'ngCookies', 'ngTouch',
+        'ngSanitize', 'ui.router', 'ngMaterial',
+        'md.data.table', 'nvd3', 'app', "ngResource",
+        "ngLodash", "googlechart"])
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('pink')
+            .accentPalette('orange');
+    })
     .config(['$resourceProvider', function ($resourceProvider) {
-        // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;
     }])
     .config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider,
@@ -16,24 +23,15 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                 controllerAs: 'vm',
                 abstract: true
             })
-            /*
-             .state('home.dashboard', {
-             url: '/dashboard',
-             templateUrl: 'app/views/dashboard.html',
-             data: {
-             title: 'Dashboard'
-             }
-             })
-             .state('home.profile', {
-             url: '/profile',
-             templateUrl: 'app/views/profile.html',
-             controller: 'ProfileController',
-             controllerAs: 'vm',
-             data: {
-             title: 'Profile'
-             }
-             })
-             */
+            .state('home.dashboard', {
+                url: '/dashboard',
+                controller: 'DashboardController',
+                controllerAs: 'dashboardVm',
+                templateUrl: 'app/views/dashboard.html',
+                data: {
+                    title: 'Dashboard'
+                }
+            })
             .state('home.beans', {
                 url: '/beans',
                 controller: 'BeansController',
@@ -80,7 +78,7 @@ angular.module('angularMaterialAdmin', ['ngAnimate', 'ngCookies', 'ngTouch',
                 }
             });
 
-        $urlRouterProvider.otherwise('/beans');
+        $urlRouterProvider.otherwise('/dashboard');
 
         $mdThemingProvider
             .theme('default')

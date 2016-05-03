@@ -1,16 +1,175 @@
+<div layout-gt-md="row" data-ng-init="dashboardVm.init()">
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Memory Usage</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" data-ng-controller="MemoryChartController as memoryChart"
+                    layout-align="center center">
+            <nvd3 options="memoryChart.chartOptions" data="memoryChart.memoryChartData"></nvd3>
+        </md-content>
+    </section>
+
+</div>
+
+
 <div layout-gt-md="row">
-  <panel-widget flex title="Site visitors" template="app/views/partials/visitors.html" class="fixed-height-widget"></panel-widget>
-  <panel-widget flex title="Warnings" template="app/views/partials/warnings.html" class="fixed-height-widget"></panel-widget>
-  <panel-widget flex title="Memory load" template="app/views/partials/memory.html" class="fixed-height-widget"></panel-widget>
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Physical memory</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" data-ng-controller="MemoryController as memory" layout-align="center center">
+            <nvd3 options="memory.chartOptions" data="memory.memoryChartData"></nvd3>
+        </md-content>
+    </section>
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Disk Space</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content data-ng-controller="DiskSpaceController as diskSpace" layout="row" layout-align="center center">
+            <nvd3 options="diskSpace.chartOptions" data="diskSpace.visitorsChartData"></nvd3>
+        </md-content>
+    </section>
+
+</div>
+<div layout-gt-md="row">
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Heap Size</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" layout-align="center center">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Heap</th>
+                    <th>Non-heap</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Current</td>
+                    <td>{{dashboardVm.metrics['heap.used']}}</td>
+                    <td>{{dashboardVm.metrics['nonheap.used']}}</td>
+                </tr>
+                <tr>
+                    <td>Committed</td>
+                    <td>{{dashboardVm.metrics['heap.committed']}}</td>
+                    <td>{{dashboardVm.metrics['nonheap.committed']}}</td>
+                </tr>
+                <tr>
+                    <td>Init</td>
+                    <td>{{dashboardVm.metrics['heap.init']}}</td>
+                    <td>{{dashboardVm.metrics['nonheap.init']}}</td>
+                </tr>
+                <tr>
+                    <td>Max</td>
+                    <td>{{dashboardVm.metrics['heap']}}</td>
+                    <td>{{dashboardVm.metrics['nonheap']}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-content>
+    </section>
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Garbage collector</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" layout-align="center center">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>PS MarkSweep</th>
+                    <th>PS Scavenge</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Collections</td>
+                    <td>{{dashboardVm.metrics['gc.ps_marksweep.count']}}</td>
+                    <td>{{dashboardVm.metrics['gc.ps_scavenge.count']}}</td>
+                </tr>
+                <tr>
+                    <td>Time spent</td>
+                    <td>{{dashboardVm.metrics['gc.ps_marksweep.time']}} ms</td>
+                    <td>{{dashboardVm.metrics['gc.ps_scavenge.time']}} ms</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-content>
+    </section>
 </div>
 
 <div layout-gt-md="row">
-  <panel-widget flex title="Server Control Panel" template="app/views/partials/controlPanel.html" class="fixed-height-widget"></panel-widget>
-  <panel-widget flex title="Usage Stats" template="app/views/partials/usage.html" class="fixed-height-widget"></panel-widget>
-  <panel-widget flex title="Autocomplete Input" template="app/views/partials/autocomplete.html" options="true" class="fixed-height-widget"></panel-widget>
-</div>
-
-<div layout-gt-md="row">
-  <panel-widget flex title="Performance" template="app/views/partials/performance.html" options="true"></panel-widget>
-  <panel-widget flex title="TODO list" template="app/views/partials/checkboxes.html"></panel-widget>
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Threads</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" layout-align="center center">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                <tr>
+                    <td>Live</td>
+                    <td>{{dashboardVm.metrics['threads']}}</td>
+                </tr>
+                <tr>
+                    <td>Peak</td>
+                    <td>{{dashboardVm.metrics['threads.peak']}}</td>
+                </tr>
+                <tr>
+                    <td>Daemon</td>
+                    <td>{{dashboardVm.metrics['threads.daemon']}}</td>
+                </tr>
+                <tr>
+                    <td>Total started</td>
+                    <td>{{dashboardVm.metrics['threads.totalStarted']}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-content>
+    </section>
+    <section layout-margin class="md-whiteframe-z1 panel-widget flex">
+        <md-toolbar md-theme="custom" class="md-hue-1 panel-widget-toolbar">
+            <div class="md-toolbar-tools">
+                <h3 class="panel-widget-tittle">Classes</h3>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-content layout="row" layout-align="center center">
+            <table class="table table-hover table-bordered">
+                <tbody>
+                <tr>
+                    <td>Loaded</td>
+                    <td>{{dashboardVm.metrics['classes.loaded']}}</td>
+                </tr>
+                <tr>
+                    <td>Unloaded</td>
+                    <td>{{dashboardVm.metrics['classes.unloaded']}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{dashboardVm.metrics['classes']}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-content>
+    </section>
 </div>
